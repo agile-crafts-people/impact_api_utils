@@ -95,22 +95,35 @@ class Config:
             self.VERSIONS_COLLECTION_NAME = ''
 
             # Collection Names
-{% for dictionary in dictionaries -%}
-{{ '            ' -}}
-self.{{ dictionary.name | upper }}_COLLECTION_NAME = ''
-{% endfor %}
+            self.IDENTITY_COLLECTION_NAME = ''
+            self.PROFILE_COLLECTION_NAME = ''
+            self.PLATFORM_COLLECTION_NAME = ''
+            self.USER_COLLECTION_NAME = ''
+            self.DASHBOARD_COLLECTION_NAME = ''
+            self.POST_COLLECTION_NAME = ''
+            self.COMMENT_COLLECTION_NAME = ''
+            self.SENTIMENT_COLLECTION_NAME = ''
+            self.CLASSIFICATION_COLLECTION_NAME = ''
+            self.TESTRUN_COLLECTION_NAME = ''
+            self.TESTDATA_COLLECTION_NAME = ''
+            self.GRADE_COLLECTION_NAME = ''
+
             # Service Port numbers
-{% for domain in architecture.domains -%}
-{% for repo in domain.repos -%}
-{% if repo.type == 'api' -%}
-{{ '            ' -}}
-self.{{ domain.name | upper }}_API_PORT = 0
-{% elif repo.type == 'spa' or repo.type == 'spa_ref' -%}
-{{ '            ' -}}
-self.{{ domain.name | upper }}_SPA_PORT = 0
-{% endif -%}
-{% endfor -%}
-{% endfor %}
+            self.RUNBOOK_API_PORT = 0
+            self.RUNBOOK_SPA_PORT = 0
+            self.SCHEMA_API_PORT = 0
+            self.SCHEMA_SPA_PORT = 0
+            self.COMMON_CODE_API_PORT = 0
+            self.COMMON_CODE_SPA_PORT = 0
+            self.PROFILE_API_PORT = 0
+            self.PROFILE_SPA_PORT = 0
+            self.EVALUATOR_API_PORT = 0
+            self.EVALUATOR_SPA_PORT = 0
+            self.DASHBOARD_API_PORT = 0
+            self.DASHBOARD_SPA_PORT = 0
+            self.CLASSIFIER_API_PORT = 0
+            self.CLASSIFIER_SPA_PORT = 0
+
 
             # Default Values grouped by value type            
             self.config_strings = {
@@ -119,7 +132,7 @@ self.{{ domain.name | upper }}_SPA_PORT = 0
                 "INPUT_FOLDER": "/input",
                 "OUTPUT_FOLDER": "/output",
                 "LOGGING_LEVEL": "INFO", 
-                "MONGO_DB_NAME": "{{info.db_name}}",
+                "MONGO_DB_NAME": "impact",
                 
                 # JWT Configuration
                 "JWT_ALGORITHM": "HS256",
@@ -131,28 +144,39 @@ self.{{ domain.name | upper }}_SPA_PORT = 0
                 "VERSIONS_COLLECTION_NAME": "CollectionVersions",
                 
                 # Collection Names
-{% for dictionary in dictionaries -%}
-{{ '                ' -}}
-"{{ dictionary.name | upper }}_COLLECTION_NAME": "{{ dictionary.name }}",
-{% endfor -%}                
-{{ '            ' -}}
-}
+                "IDENTITY_COLLECTION_NAME": "Identity",
+                "PROFILE_COLLECTION_NAME": "Profile",
+                "PLATFORM_COLLECTION_NAME": "Platform",
+                "USER_COLLECTION_NAME": "User",
+                "DASHBOARD_COLLECTION_NAME": "Dashboard",
+                "POST_COLLECTION_NAME": "Post",
+                "COMMENT_COLLECTION_NAME": "Comment",
+                "SENTIMENT_COLLECTION_NAME": "Sentiment",
+                "CLASSIFICATION_COLLECTION_NAME": "Classification",
+                "TESTRUN_COLLECTION_NAME": "TestRun",
+                "TESTDATA_COLLECTION_NAME": "TestData",
+                "GRADE_COLLECTION_NAME": "Grade",
+            }
             self.config_ints = {
                 # JWT Configuration
                 "JWT_TTL_MINUTES": "480",
 
                 # Service Port numbers 
-{% for domain in architecture.domains -%}
-{% for repo in domain.repos -%}
-{% if repo.type == 'api' -%}
-{{ '                ' -}}
-"{{ domain.name | upper }}_API_PORT": {{ repo.port }},
-{% elif repo.type == 'spa' or repo.type == 'spa_ref' -%}
-{{ '                ' -}}
-"{{ domain.name | upper }}_SPA_PORT": {{ repo.port }},
-{% endif -%}
-{% endfor -%}
-{% endfor %}                
+                "RUNBOOK_API_PORT": 9090,
+                "RUNBOOK_SPA_PORT": 9091,
+                "SCHEMA_API_PORT": 9092,
+                "SCHEMA_SPA_PORT": 9093,
+                "COMMON_CODE_API_PORT": 9094,
+                "COMMON_CODE_SPA_PORT": 9095,
+                "PROFILE_API_PORT": 9096,
+                "PROFILE_SPA_PORT": 9097,
+                "EVALUATOR_API_PORT": 9098,
+                "EVALUATOR_SPA_PORT": 9099,
+                "DASHBOARD_API_PORT": 9100,
+                "DASHBOARD_SPA_PORT": 9101,
+                "CLASSIFIER_API_PORT": 9102,
+                "CLASSIFIER_SPA_PORT": 9103,
+                
             }
 
             self.config_booleans = {
@@ -393,4 +417,3 @@ self.{{ domain.name | upper }}_SPA_PORT = 0
             
         # logger.log("Config Initializing")
         return Config._instance
-
