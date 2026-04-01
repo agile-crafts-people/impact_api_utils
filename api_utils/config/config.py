@@ -44,10 +44,8 @@ class Config:
         'engagement'
         >>> print(config.MONGODB_API_PORT)
         8180
-{%- if dictionaries | length > 0 %}
-        >>> print(config.{{ dictionaries[0].name | replace(' ', '_') | replace('-', '_') | upper }}_COLLECTION_NAME)
-        '{{ dictionaries[0].name }}'
-{%- endif %}
+        >>> print(config.IDENTITY_COLLECTION_NAME)
+        'Identity'
         >>> print(config.DASHBOARD_API_PORT)
         8186
     """
@@ -95,9 +93,20 @@ class Config:
             self.VERSIONS_COLLECTION_NAME = ''
 
             # Data collection names (from catalog.data_dictionaries)
-{%- for d in dictionaries %}
-            self.{{ d.name | replace(' ', '_') | replace('-', '_') | upper }}_COLLECTION_NAME = ''
-{%- endfor %}
+            self.IDENTITY_COLLECTION_NAME = ''
+            self.PROFILE_COLLECTION_NAME = ''
+            self.PLATFORM_COLLECTION_NAME = ''
+            self.USER_COLLECTION_NAME = ''
+            self.DASHBOARD_COLLECTION_NAME = ''
+            self.POST_COLLECTION_NAME = ''
+            self.COMMENT_COLLECTION_NAME = ''
+            self.SENTIMENT_COLLECTION_NAME = ''
+            self.CLASSIFICATION_COLLECTION_NAME = ''
+            self.TESTRUN_COLLECTION_NAME = ''
+            self.TESTDATA_COLLECTION_NAME = ''
+            self.GRADE_COLLECTION_NAME = ''
+            self.RATIO_COLLECTION_NAME = ''
+            self.SENTIMENT_COLLECTION_NAME = ''
 
             # Service Port numbers
             self.SCHEMA_API_PORT = 0
@@ -131,9 +140,20 @@ class Config:
                 "VERSIONS_COLLECTION_NAME": "CollectionVersions",
                 
                 # Data collection names (from catalog.data_dictionaries)
-{%- for d in dictionaries %}
-                "{{ d.name | replace(' ', '_') | replace('-', '_') | upper }}_COLLECTION_NAME": "{{ d.name }}",
-{%- endfor %}
+                "IDENTITY_COLLECTION_NAME": "Identity",
+                "PROFILE_COLLECTION_NAME": "Profile",
+                "PLATFORM_COLLECTION_NAME": "Platform",
+                "USER_COLLECTION_NAME": "User",
+                "DASHBOARD_COLLECTION_NAME": "Dashboard",
+                "POST_COLLECTION_NAME": "Post",
+                "COMMENT_COLLECTION_NAME": "Comment",
+                "SENTIMENT_COLLECTION_NAME": "Sentiment",
+                "CLASSIFICATION_COLLECTION_NAME": "Classification",
+                "TESTRUN_COLLECTION_NAME": "TestRun",
+                "TESTDATA_COLLECTION_NAME": "TestData",
+                "GRADE_COLLECTION_NAME": "Grade",
+                "RATIO_COLLECTION_NAME": "Ratio",
+                "SENTIMENT_COLLECTION_NAME": "Sentiment",
             }
             self.config_ints = {
                 # Service Port numbers 
@@ -387,4 +407,3 @@ class Config:
             
         # logger.log("Config Initializing")
         return Config._instance
-

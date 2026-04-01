@@ -1,6 +1,6 @@
-# Mentor Hub — shared API utilities
+# Creators Dashboard — shared API utilities
 
-This repo builds and publishes the **`mentorhub_api_utils`** PyPI library used across the [Mentor Hub](https://github.com/mentor-hub-system/mentorhub) system.
+This repo builds and publishes the **`impact_api_utils`** PyPI library used across the [Creators Dashboard](https://github.com/agile-crafts-people/impact) system.
 
 ## ⚠️ Security Requirements
 
@@ -33,11 +33,11 @@ pipenv run db
 ## run unit tests (includes MongoIO Integration Tests)
 pipenv run test
 
-## run demo dev server - captures command line, serves API at localhost:8385
+## run demo dev server - captures command line, serves API at localhost:9092
 ## Note: dev uses a fixed JWT_SECRET for local E2E; see tests/e2e_auth.py
 pipenv run dev
 
-## run E2E tests (assumes running API at localhost:8385)
+## run E2E tests (assumes running API at localhost:9092)
 pipenv run e2e
 
 ## build package for deployment
@@ -62,7 +62,7 @@ pipenv run lint
 
 ## Domain APIs vs. this library
 
-**Developer Edition:** Domain APIs and this library **validate** JWTs issued by the welcome page / IdP; they do not expose HTTP endpoints that mint credentials. See [API Standards](https://github.com/mentor-hub-system/mentorhub/blob/main/DeveloperEdition/standards/api_standards.md).
+**Developer Edition:** Domain APIs and this library **validate** JWTs issued by the welcome page / IdP; they do not expose HTTP endpoints that mint credentials. See [API Standards](https://github.com/agile-crafts-people/impact/blob/main/DeveloperEdition/standards/api_standards.md).
 
 The packaged **demo server** (`api_utils/server.py`) documents config and metrics only; obtain Bearer tokens from your IdP (or the static test token in `tests/e2e_auth.py` for black-box runs).
 
@@ -77,12 +77,12 @@ See [server.py](./api_utils/server.py) for sample implementation details.
 # Start the demo server (JWT_SECRET matches tests/e2e_auth.py)
 pipenv run dev
 
-# Server will be available at http://localhost:8385
+# Server will be available at http://localhost:9092
 ```
 
 ### API Explorer
 
-Visit **http://localhost:8385/docs/explorer.html** for an interactive API explorer with:
+Visit **http://localhost:9092/docs/explorer.html** for an interactive API explorer with:
 - Complete endpoint documentation
 - Try-it-out functionality for testing
 - Request/response examples
@@ -99,11 +99,11 @@ Visit **http://localhost:8385/docs/explorer.html** for an interactive API explor
 
 ```bash
 # Get configuration (use a JWT from your IdP, or the token in tests/e2e_auth.py for local E2E)
-curl http://localhost:8385/api/config \
+curl http://localhost:9092/api/config \
   -H "Authorization: Bearer $TOKEN"
 
 # Get Prometheus metrics
-curl http://localhost:8385/metrics
+curl http://localhost:9092/metrics
 ```
 
 ### What the Server Demonstrates
@@ -128,12 +128,12 @@ All installations use HTTPS with GitHub Personal Access Tokens (PATs).
 git config --global url."https://<YOUR_TOKEN>@github.com/".insteadOf "https://github.com/"
 
 # Then install normally
-pipenv install git+https://github.com/mentor-hub-system/api_utils.git
+pipenv install git+https://github.com/agile-crafts-people/api_utils.git
 ```
 
 **Development Installation (Editable Mode):**
 ```bash
-pipenv install -e git+https://github.com/mentor-hub-system/api_utils.git#egg=api-utils
+pipenv install -e git+https://github.com/agile-crafts-people/api_utils.git#egg=api-utils
 ```
 
 Use editable mode when you're **simultaneously working on both**:
@@ -160,7 +160,7 @@ Before deploying to production, ensure:
 
 # Future Roadmap
 
-api_utils is the official standards-compliant Python package used by all Mentor Hub python projects. It is currently installed via HTTPS with GitHub Personal Access Tokens (PATs). 
+api_utils is the official standards-compliant Python package used by all Creators Dashboard python projects. It is currently installed via HTTPS with GitHub Personal Access Tokens (PATs). 
 Once a number of production deployed consumers exist, version stability becomes important so they can pin known-good releases instead of tracking a moving branch. We will introduce semantic versioning via Git tags and expose the version in the package, allowing consumers to pin exact versions.
 Once funding or organizational maturity allows, infrastructure improvements can replace the Git-based distribution without changing the package itself.
 	•	Stand up a private JFrog Artifactory PyPI repository, providing centralized, permissioned package hosting.
